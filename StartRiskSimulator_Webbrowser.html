@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html class="js" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="theme-color" content="#4388e5">
+  <script src="./Risk_Simulator_Files/jquery-3.5.1.js"></script>
+  <script src="./Risk_Simulator_Files/lazysizes.js" async="async"></script>
+  <title>Risk Simulator</title><!-- /snippets/social-meta-tags.liquid -->
+
+
+  <meta property="og:title" content="Risk Simulator">
+
+  <style>
+    :root {
+      --color-text: #000000;
+      --color-text-rgb: 0, 0, 0;
+      --color-body-text: #000000;
+      --color-sale-text: #4388e5;
+      --color-small-button-text-border: #ffffff;
+      --color-text-field: #242426;
+      --color-text-field-text: #ffffff;
+      --color-text-field-text-rgb: 255, 255, 255;
+
+      --color-btn-primary: #4388e5;
+      --color-btn-primary-darker: #1e6dd7;
+      --color-btn-primary-text: #ffffff;
+
+      --color-blankstate: rgba(0, 0, 0, 0.35);
+      --color-blankstate-border: rgba(0, 0, 0, 0.2);
+      --color-blankstate-background: rgba(0, 0, 0, 0.1);
+
+      --color-text-focus: #404040;
+      --color-overlay-text-focus: #e6e6e6;
+      --color-btn-primary-focus: #1e6dd7;
+      --color-btn-social-focus: #d2d2d2;
+      --color-small-button-text-border-focus: #e6e6e6;
+      --predictive-search-focus: #3d3d40;
+
+      --color-body: #242426;
+      --color-bg: #242426;
+      --color-bg-rgb: 36, 36, 38;
+      --color-bg-alt: rgba(0, 0, 0, 0.05);
+      --color-bg-currency-selector: rgba(0, 0, 0, 0.2);
+
+      --color-overlay-title-text: #ffffff;
+      --color-image-overlay: rgba(0, 0, 0, 0);
+      --color-image-overlay-rgb: 0, 0, 0;
+      --opacity-image-overlay: 0.0;
+      --hover-overlay-opacity: 0.4;
+
+      --color-border: #ebebeb;
+      --color-border-form: #acaaaa;
+      --color-border-form-darker: #939090;
+
+      --svg-select-icon: url(//cdn.shopify.com/s/files/1/0534/4424/7743/t/1/assets/ico-select.svg?v=16043144596332530589);
+      --slick-img-url: url(//cdn.shopify.com/s/files/1/0534/4424/7743/t/1/assets/ajax-loader.gif?v=4135686330247201572);
+
+      --font-weight-body--bold: 700;
+      --font-weight-body--bolder: 700;
+
+      --font-stack-header: Quicksand, sans-serif;
+      --font-style-header: normal;
+      --font-weight-header: 400;
+
+      --font-stack-body: Helvetica, 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif;
+      --font-style-body: normal;
+      --font-weight-body: 400;
+
+      --font-size-header: 31;
+
+      --font-size-base: 18;
+
+      --font-h1-desktop: 41;
+      --font-h1-mobile: 38;
+      --font-h2-desktop: 24;
+      --font-h2-mobile: 21;
+      --font-h3-mobile: 24;
+      --font-h4-desktop: 21;
+      --font-h4-mobile: 18;
+      --font-h5-desktop: 17;
+      --font-h5-mobile: 16;
+      --font-h6-desktop: 16;
+      --font-h6-mobile: 15;
+
+      --font-mega-title-large-desktop: 77;
+
+      --font-rich-text-large: 20;
+      --font-rich-text-small: 15;
+
+
+      --color-video-bg: #303033;
+
+
+      --global-color-image-loader-primary: rgba(0, 0, 0, 0.06);
+      --global-color-image-loader-secondary: rgba(0, 0, 0, 0.12);
+    }
+  </style>
+
+
+  <style>
+    *,
+    ::after,
+    ::before {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0
+    }
+
+    body,
+    html {
+      background-color: var(--color-body)
+    }
+
+    body,
+    button {
+      font-size: calc(var(--font-size-base) * 1px);
+      font-family: var(--font-stack-body);
+      font-style: var(--font-style-body);
+      font-weight: var(--font-weight-body);
+      color: var(--color-text);
+      line-height: 1.5
+    }
+
+    body,
+    button {
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%
+    }
+
+    .border-bottom {
+      border-bottom: 1px solid var(--color-border)
+    }
+
+    .btn--link {
+      background-color: transparent;
+      border: 0;
+      margin: 0;
+      color: var(--color-text);
+      text-align: left
+    }
+
+    .text-right {
+      text-align: right
+    }
+
+    .icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      fill: currentColor
+    }
+
+    .icon__fallback-text,
+    .visually-hidden {
+      position: absolute !important;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      width: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0
+    }
+
+    svg.icon:not(.icon--full-color) circle,
+    svg.icon:not(.icon--full-color) ellipse,
+    svg.icon:not(.icon--full-color) g,
+    svg.icon:not(.icon--full-color) line,
+    svg.icon:not(.icon--full-color) path,
+    svg.icon:not(.icon--full-color) polygon,
+    svg.icon:not(.icon--full-color) polyline,
+    svg.icon:not(.icon--full-color) rect,
+    symbol.icon:not(.icon--full-color) circle,
+    symbol.icon:not(.icon--full-color) ellipse,
+    symbol.icon:not(.icon--full-color) g,
+    symbol.icon:not(.icon--full-color) line,
+    symbol.icon:not(.icon--full-color) path,
+    symbol.icon:not(.icon--full-color) polygon,
+    symbol.icon:not(.icon--full-color) polyline,
+    symbol.icon:not(.icon--full-color) rect {
+      fill: inherit;
+      stroke: inherit
+    }
+
+    li {
+      list-style: none
+    }
+
+    .list--inline {
+      padding: 0;
+      margin: 0
+    }
+
+    .list--inline>li {
+      display: inline-block;
+      font-size: 17px;
+      margin-bottom: 0;
+      vertical-align: middle
+    }
+
+    a {
+      color: var(--color-text);
+      text-decoration: none
+    }
+
+    .h1,
+    .h2,
+    h1,
+    h2 {
+      margin: 0 0 17.5px;
+      font-family: var(--font-stack-header);
+      font-style: var(--font-style-header);
+      font-weight: var(--font-weight-header);
+      line-height: 1.2;
+      overflow-wrap: break-word;
+      word-wrap: break-word
+    }
+
+    .h1 a,
+    .h2 a,
+    h1 a,
+    h2 a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: inherit
+    }
+
+    .h1,
+    h1 {
+      font-size: calc(((var(--font-h1-desktop))/ (var(--font-size-base))) * 1em);
+      text-transform: none;
+      letter-spacing: 0
+    }
+
+    @media only screen and (max-width:749px) {
+
+      .h1,
+      h1 {
+        font-size: calc(((var(--font-h1-mobile))/ (var(--font-size-base))) * 1em)
+      }
+    }
+
+    .h2,
+    h2 {
+      font-size: calc(((var(--font-h2-desktop))/ (var(--font-size-base))) * 1em);
+      text-transform: uppercase;
+      letter-spacing: .1em
+    }
+
+    @media only screen and (max-width:749px) {
+
+      .h2,
+      h2 {
+        font-size: calc(((var(--font-h2-mobile))/ (var(--font-size-base))) * 1em)
+      }
+    }
+
+    p {
+      color: var(--color-body-text);
+      margin: 0 0 19.44444px
+    }
+
+    @media only screen and (max-width:749px) {
+      p {
+        font-size: calc(((var(--font-size-base) - 1)/ (var(--font-size-base))) * 1em)
+      }
+    }
+
+    p:last-child {
+      margin-bottom: 0
+    }
+
+    @media only screen and (max-width:749px) {
+      .small--hide {
+        display: none !important
+      }
+    }
+
+    .grid {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-left: -30px
+    }
+
+    .grid::after {
+      content: '';
+      display: table;
+      clear: both
+    }
+
+    @media only screen and (max-width:749px) {
+      .grid {
+        margin-left: -22px
+      }
+    }
+
+    .grid::after {
+      content: '';
+      display: table;
+      clear: both
+    }
+
+    .grid--no-gutters {
+      margin-left: 0
+    }
+
+    .grid--no-gutters .grid__item {
+      padding-left: 0
+    }
+
+    .grid--table {
+      display: table;
+      table-layout: fixed;
+      width: 100%
+    }
+
+    .grid--table>.grid__item {
+      float: none;
+      display: table-cell;
+      vertical-align: middle
+    }
+
+    .grid__item {
+      float: left;
+      padding-left: 30px;
+      width: 100%
+    }
+
+    @media only screen and (max-width:749px) {
+      .grid__item {
+        padding-left: 22px
+      }
+    }
+
+    .grid__item[class*="--push"] {
+      position: relative
+    }
+
+    @media only screen and (min-width:750px) {
+      .medium-up--one-quarter {
+        width: 25%
+      }
+
+      .medium-up--push-one-third {
+        width: 33.33%
+      }
+
+      .medium-up--one-half {
+        width: 50%
+      }
+
+      .medium-up--push-one-third {
+        left: 33.33%;
+        position: relative
+      }
+    }
+
+    .site-header {
+      position: relative;
+      background-color: var(--color-body)
+    }
+
+    @media only screen and (max-width:749px) {
+      .site-header {
+        border-bottom: 1px solid var(--color-border)
+      }
+    }
+
+    @media only screen and (min-width:750px) {
+      .site-header {
+        padding: 0 55px
+      }
+
+      .site-header.logo--center {
+        padding-top: 30px
+      }
+    }
+
+    .site-header__logo {
+      margin: 15px 0
+    }
+
+    .logo-align--center .site-header__logo {
+      text-align: center;
+      margin: 0 auto
+    }
+
+    @media only screen and (max-width:749px) {
+      .logo-align--center .site-header__logo {
+        text-align: left;
+        margin: 15px 0
+      }
+    }
+
+    @media only screen and (max-width:749px) {
+      .site-header__logo {
+        padding-left: 22px;
+        text-align: left
+      }
+
+      .site-header__logo img {
+        margin: 0
+      }
+    }
+
+    .site-header__logo-link {
+      display: inline-block;
+      word-break: break-word
+    }
+
+    @media only screen and (min-width:750px) {
+      .logo-align--center .site-header__logo-link {
+        margin: 0 auto
+      }
+    }
+
+    .site-header__logo-image {
+      display: block
+    }
+
+    @media only screen and (min-width:750px) {
+      .site-header__logo-image {
+        margin: 0 auto
+      }
+    }
+
+    .site-header__logo-image img {
+      width: 100%
+    }
+
+    .site-header__logo-image--centered img {
+      margin: 0 auto
+    }
+
+    .site-header__logo img {
+      display: block
+    }
+
+    .site-header__icons {
+      position: relative;
+      white-space: nowrap
+    }
+
+    @media only screen and (max-width:749px) {
+      .site-header__icons {
+        width: auto;
+        padding-right: 13px
+      }
+
+      .site-header__icons .btn--link,
+      .site-header__icons .site-header__cart {
+        font-size: calc(((var(--font-size-base))/ (var(--font-size-base))) * 1em)
+      }
+    }
+
+    .site-header__icons-wrapper {
+      position: relative;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      width: 100%;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+      align-items: center;
+      -webkit-justify-content: flex-end;
+      -ms-justify-content: flex-end;
+      justify-content: flex-end
+    }
+
+    .site-header__account,
+    .site-header__cart,
+    .site-header__search {
+      position: relative
+    }
+
+    .site-header__search.site-header__icon {
+      display: none
+    }
+
+    @media only screen and (min-width:1400px) {
+      .site-header__search.site-header__icon {
+        display: block
+      }
+    }
+
+    .site-header__search-toggle {
+      display: block
+    }
+
+    @media only screen and (min-width:750px) {
+
+      .site-header__account,
+      .site-header__cart {
+        padding: 10px 11px
+      }
+    }
+
+    .site-header__cart-title,
+    .site-header__search-title {
+      position: absolute !important;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      width: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      display: block;
+      vertical-align: middle
+    }
+
+    .site-header__cart-title {
+      margin-right: 3px
+    }
+
+    .site-header__cart-count {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: .4rem;
+      top: .2rem;
+      font-weight: 700;
+      background-color: var(--color-btn-primary);
+      color: var(--color-btn-primary-text);
+      border-radius: 50%;
+      min-width: 1em;
+      height: 1em
+    }
+
+    .site-header__cart-count span {
+      font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: calc(11em / 16);
+      line-height: 1
+    }
+
+    @media only screen and (max-width:749px) {
+      .site-header__cart-count {
+        top: calc(7em / 16);
+        right: 0;
+        border-radius: 50%;
+        min-width: calc(19em / 16);
+        height: calc(19em / 16)
+      }
+    }
+
+    @media only screen and (max-width:749px) {
+      .site-header__cart-count span {
+        padding: .25em calc(6em / 16);
+        font-size: 12px
+      }
+    }
+
+    .site-header__menu {
+      display: none
+    }
+
+    @media only screen and (max-width:749px) {
+      .site-header__icon {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 10px 11px;
+        margin: 0
+      }
+    }
+
+    @media only screen and (min-width:750px) {
+      .site-header__icon .icon-search {
+        margin-right: 3px
+      }
+    }
+
+    .announcement-bar {
+      z-index: 10;
+      position: relative;
+      text-align: center;
+      border-bottom: 1px solid transparent;
+      padding: 2px
+    }
+
+    .announcement-bar__link {
+      display: block
+    }
+
+    .announcement-bar__message {
+      display: block;
+      padding: 11px 22px;
+      font-size: calc(((16)/ (var(--font-size-base))) * 1em);
+      font-weight: var(--font-weight-header)
+    }
+
+    @media only screen and (min-width:750px) {
+      .announcement-bar__message {
+        padding-left: 55px;
+        padding-right: 55px
+      }
+    }
+
+    .site-nav {
+      position: relative;
+      padding: 0;
+      text-align: center;
+      margin: 25px 0
+    }
+
+    .site-nav a {
+      padding: 3px 10px
+    }
+
+    .site-nav__link {
+      display: block;
+      white-space: nowrap
+    }
+
+    .site-nav--centered .site-nav__link {
+      padding-top: 0
+    }
+
+    .site-nav__link .icon-chevron-down {
+      width: calc(8em / 16);
+      height: calc(8em / 16);
+      margin-left: .5rem
+    }
+
+    .site-nav__label {
+      border-bottom: 1px solid transparent
+    }
+
+    .site-nav__link--active .site-nav__label {
+      border-bottom-color: transparent;
+      font-weight: bold;
+    }
+
+    .site-nav__link--button {
+      border: none;
+      background-color: transparent;
+      padding: 3px 10px
+    }
+
+    .site-header__mobile-nav {
+      z-index: 11;
+      position: relative;
+      background-color: var(--color-body)
+    }
+
+    @media only screen and (max-width:749px) {
+      .site-header__mobile-nav {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -o-align-items: center;
+        align-items: center
+      }
+    }
+
+    .mobile-nav--open .icon-close {
+      display: none
+    }
+
+    .main-content {
+      opacity: 0
+    }
+
+    .main-content .shopify-section {
+      display: none;
+      background: #c1c1c1;
+      color: black;
+    }
+
+    .main-content .shopify-section:first-child {
+      display: inherit
+    }
+
+    .critical-hidden {
+      display: none
+    }
+  </style>
+  <link rel="stylesheet" href="./Risk_Simulator_Files/theme.css" type="text/css" media="all">
+
+</head>
+
+<body class="template-page paywhirl-theme-debut">
+  <div class="cart-popup-wrapper cart-popup-wrapper--hidden critical-hidden" role="dialog" aria-modal="true"
+    aria-labelledby="CartPopupHeading" data-cart-popup-wrapper="">
+    <div class="cart-popup" data-cart-popup="" tabindex="-1">
+      <div class="cart-popup__header">
+        <h2 id="CartPopupHeading" class="cart-popup__heading">Just added to your cart</h2>
+        <button class="cart-popup__close" aria-label="Close" data-cart-popup-close=""><svg aria-hidden="true"
+            focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 40 40">
+            <path
+              d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"
+              class="layer"></path>
+          </svg></button>
+      </div>
+      <div class="cart-popup-item">
+        <div class="cart-popup-item__image-wrapper hide" data-cart-popup-image-wrapper=""
+          data-image-loading-animation=""></div>
+        <div class="cart-popup-item__description">
+          <div>
+            <h3 class="cart-popup-item__title" data-cart-popup-title=""></h3>
+            <ul class="product-details" aria-label="Product details" data-cart-popup-product-details=""></ul>
+          </div>
+          <div class="cart-popup-item__quantity">
+            <span class="visually-hidden" data-cart-popup-quantity-label=""></span>
+            <span aria-hidden="true">Qty:</span>
+            <span aria-hidden="true" data-cart-popup-quantity=""></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-popup__dismiss">
+        <button class="cart-popup__dismiss-button text-link text-link--accent" data-cart-popup-dismiss="">
+          Continue shopping
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="shopify-section-header" class="shopify-section">
+
+    <div id="SearchDrawer" class="search-bar drawer drawer--top critical-hidden" role="dialog" aria-modal="true"
+      aria-label="Search" data-predictive-search-drawer="">
+      <div class="search-bar__interior">
+        <div class="search-form__container" data-search-form-container="">
+          <div class="search-bar__actions">
+            <button type="button" class="btn--link search-bar__close js-drawer-close">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 40 40">
+                <path
+                  d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z"
+                  class="layer"></path>
+              </svg>
+              <span class="icon__fallback-text">Close search</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-container drawer-page-content" id="PageContainer">
+
+    <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
+
+      <div class="page-width">
+        <div class="grid">
+          <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+            <div class="rte">
+
+              <link href="./Risk_Simulator_Files/rs-style.css" rel="stylesheet" type="text/css" media="all">
+              <div class="rs-container">
+
+                <form class="leftBar" method="post">
+
+                  <div class="switch">
+                    <div class="quality">
+                      <input checked="" id="percentageCheck" name="q" type="radio" value="q1">
+                      <label for="percentageCheck">%</label>
+                    </div>
+                    <div class="quality" style="float: right;">
+                      <input id="rMultiplesCheck" name="q" type="radio" value="q2">
+                      <label for="rMultiplesCheck">R</label>
+                    </div>
+                  </div>
+
+                  <div class="switch">
+                    <div class="quality">
+                      <input checked="" id="manualCheck" name="n" type="radio" value="n1">
+                      <label for="manualCheck">Manual</label>
+                    </div>
+                    <div class="quality" id="last" style="float: right;">
+                      <input id="fileCheck" name="n" type="radio" value="n2">
+                      <label for="fileCheck">File</label>
+                    </div>
+                  </div>
+
+                  <div id="uploadFile"></div>
+                  <label for="DDAl">DD Allowance <a class="tooltip-rs">
+                      <div class="isBG"></div>
+                      <span>
+                        How much drawdown do you accept? The Risk Simulator will give you suggestions on what to change
+                        to not hit your desired drawdown.
+                      </span>
+                    </a></label>
+                  <div class="flex" id="NI">
+                    <span class="ip"><span class="pc">%</span></span>
+                    <input type="number" id="maxDrawdown" name="DDAl">
+                  </div>
+
+                  <div id="startCapital">
+                    <label for="sC">Starting Capital <a class="tooltip-rs">
+                        <div class="isBG"></div>
+                        <span>
+                          Starting Capital, where the calculations are based on. Note: more trades mean there are
+                          compounded effects in the results.
+                        </span>
+                      </a></label>
+                    <div class="flex" id="NI">
+                      <span class="ip">$</span>
+                      <input data-type="currency" type="text" id="startC" name="sC" value="100,000.00">
+                    </div>
+                  </div>
+
+                  <label for="trds">Trades <a class="tooltip-rs">
+                      <div class="isBG"></div>
+                      <span>
+                        Number of trades, that the simulator will calculate in each simulator run.
+                      </span>
+                    </a></label>
+                  <div class="flex" id="NI">
+                    <span class="ip">#</span>
+                    <input data-type="number" type="text" id="trades" name="trds" value="100">
+                  </div>
+
+                  <label for="SimRs">Simulator Runs <a class="tooltip-rs">
+                      <div class="isBG"></div>
+                      <span>
+                        How many runs will the simulator take in the background with #trades each in order to calculate
+                        maximum drawdown and other metrics? Notice: not all simulations are shown in the graph.
+                        Calculation can take some time, depending on your device and the number of runs.
+                      </span>
+                    </a></label>
+                  <div class="flex" id="NI">
+                    <span class="ip">#</span>
+                    <input data-type="number" type="text" id="SimR" name="SimRs" value="10,000">
+                  </div>
+
+                  <div id="exInp">
+                    <label for="GraphLs">Graph Lines <a class="tooltip-rs">
+                        <div class="isBG fill-gray"></div>
+                        <span>
+                          How many simulutar runs run will be shown on the equity curve simulation graph? Notice: keep
+                          this number low, otherwise you can't see anything.
+                        </span>
+                      </a></label>
+                    <div class="flex" id="NI2">
+                      <span class="ip">#</span>
+                      <input data-type="number" type="text" id="GraphL" name="GraphLs" value="20">
+                    </div>
+
+                    <label for="rfRate">Risk-Free Rate <a class="tooltip-rs">
+                        <div class="isBG fill-gray"></div>
+                        <span>
+                          The return that is considered "risk-free" to calculate Sharp Ratio. It is fixed to the
+                          "3-Month Treasury Bill: Secondary Market Rate" (TB3MS). You can change it to whatever
+                          benchmark you want, for example you can measure your returns and its volatility against the
+                          S&amp;P500 Annualised Return.
+                        </span>
+                      </a></label>
+                    <div class="flex" id="NI2">
+                      <span class="ip">%</span>
+                      <input type="number" id="rFr" name="rfRate" value="2.4">
+                    </div>
+                  </div>
+
+                  <div id="stDs">
+                    <label for="StandardDL">StD Loss Trades <a class="tooltip-rs">
+                        <div class="isBG fill-gray"></div>
+                        <span>
+                          Standard Deviation of loss trades. This is the squared root of the variance, meaning the
+                          simulator will add or substract to the negative trade outcomes based on a normal gaussian
+                          distribution.
+                        </span>
+                      </a></label>
+                    <div class="flex" id="NI2">
+                      <span class="ip">%</span>
+                      <input type="number" id="StdL" name="StandardDL" value="20">
+                    </div>
+
+                    <label for="StandardDW">StD Profit Trades <a class="tooltip-rs">
+                        <div class="isBG fill-gray"></div>
+                        <span>
+                          Standard Deviation of profit trades. This is the squared root of the variance, meaning the
+                          simulator will add or substract to the positive trade outcomes based on a normal gaussian
+                          distribution.
+                        </span>
+                      </a></label>
+                    <div class="flex" id="NI2">
+                      <span class="ip">%</span>
+                      <input type="number" id="StdW" name="StandardDW" value="40">
+                    </div>
+                  </div>
+                </form>
+
+                <form id="rightInps" class="rightInputs" method="post">
+
+                  <div class="entrys">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <label for="averageLoss" class="label-main-inp">Average Loss <a class="tooltip-rs">
+                                <div class="isBG"></div>
+                                <span>
+                                  The average losing trade of your trading system (geometric, weighted and other
+                                  averages can be used too).
+                                </span>
+                              </a></label>
+                            <div class="flex" id="I">
+                              <span class="ip"><span class="pc">%</span></span>
+                              <input type="number" id="avgL" name="averageLoss">
+                            </div>
+                          </td>
+                          <td>
+                            <label for="averageWin" class="label-main-inp">Average Win <a class="tooltip-rs">
+                                <div class="isBG"></div>
+                                <span>
+                                  The average winning trade of your trading system (geometric, weighted and other
+                                  averages can be used too).
+                                </span>
+                              </a></label>
+                            <div class="flex" id="I">
+                              <span class="ip"><span class="pc">%</span></span>
+                              <input type="number" id="avgW" name="averageWin">
+                            </div>
+                          </td>
+                          <td>
+                            <label for="winningP" class="label-main-inp">Hitrate <a class="tooltip-rs">
+                                <div class="isBG"></div>
+                                <span>
+                                  The percentage of your winning trades from all trades. Example: 45 out of 100 trades
+                                  are winners --&gt; 45% hitrate.
+                                </span>
+                              </a></label>
+                            <div class="flex" id="I">
+                              <span class="ip">%</span>
+                              <input type="number" id="winP" name="winningP">
+                            </div>
+                          </td>
+                          <td style="text-align: center">
+                            <input class="calcButton" id="calc" type="button" value="CALCULATE">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="cvMain" id="mainGraph"><canvas id="canvas"></canvas></div>
+
+                  <div class="outPuts">
+                    <div class="textOut">
+                    </div>
+                    <div class="mainOut">
+                    </div>
+                    <table class="more">
+                      <tbody>
+                        <tr>
+                          <td id="graph1">
+                            <div class="restC"><canvas id="canvas2"></canvas></div>
+                          </td>
+                          <td id="graph2">
+                            <div class="restC"><canvas id="canvas3"></canvas></div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="more">
+                      <tbody>
+                        <tr>
+                          <td id="graph3">
+                            <div class="restC"><canvas id="pie1"></canvas></div>
+                          </td>
+                          <td id="graph4">
+                            <div class="restC"><canvas id="pie2"></canvas></div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="cvMain" id="extraGraphs">
+                      <canvas id="scatter">
+                        <canvas id="canvas4">
+                        </canvas></canvas>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+              <script type="text/javascript" src="./Risk_Simulator_Files/jquery-3.3.1.min.js"></script>
+              <script src="./Risk_Simulator_Files/wp_rs.js" type="text/javascript"></script>
+              <script src="./Risk_Simulator_Files/Chart.bundle.js"></script>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+</body>
+
+</html>
