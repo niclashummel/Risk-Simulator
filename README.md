@@ -1,7 +1,13 @@
-# risk-simulator
-This is a monte carlo risk simulator.
+# Equity Curve Risk Simulator
+Analyze and quantify the risk of trading strategies with this Equity Curve Risk Simulator. This tool allows you to input key parameters and run simulations to generate equity curves, providing insights into the potential risk and profitability of your trades.
 
-# installation
+## Key Features:
+- Parameter-based input for risk and trading conditions / File input also possible.
+- Simulates and visualizes multiple trading equity curve outcomes.
+- Outputs critical metrics such as Profit Factor, Sharpe Ratio, and Drawdown statistics.
+- Find out what you can change with your trading system in order to be aligned with your desired drawdown.
+
+# Installation
 1. Code -> download zip (or repo clone)
 2. Extract the files
 3. Open StartRiskSimulator_Webbrowser.html
