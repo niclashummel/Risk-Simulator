@@ -2,10 +2,10 @@
 Analyze and quantify the risk of trading strategies with this Equity Curve Risk Simulator. This tool allows you to input key parameters and run simulations to generate equity curves, providing insights into the potential risk and profitability of your trades.
 
 ## Key Features:
-- Parameter-based input for risk and trading conditions / File input also possible.
+- Parameter-based input for risk and trading conditions for average percentages or R-Multiples. / File input also possible.
 - Simulates and visualizes multiple trading equity curve outcomes.
 - Outputs critical metrics such as Profit Factor, Sharpe Ratio, and Drawdown statistics.
-- Find out what you can change with your trading system in order to be aligned with your desired drawdown.
+- Find out what you can change with your trading system by setting the 'DD Allowance' in order to be aligned with your desired drawdown.
 
 # Installation
 1. Code -> download zip (or repo clone)
